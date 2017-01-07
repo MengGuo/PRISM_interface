@@ -8,6 +8,8 @@ Description
 -----
 This package contains the implementation for generating input files, particularly, MDP model, LTL/DRA model for the [PRISM model checker](http://www.prismmodelchecker.org).
 
+Creating by hand these modules is simply tedious, particularly so since PRISM does not allow non-integer identifier for each mode of a state. 
+
 
 
 
