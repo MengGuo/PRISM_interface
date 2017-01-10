@@ -75,9 +75,9 @@ def prod_mdp_module_nx2prism(nx_prod_mdp):
             for s in Ip:
                 idx_s = states_list.index(s)
                 if j_Ip == 0:
-                    prod_mdp_nm_file.write('s = %d'%idx_s)
+                    prod_mdp_nm_file.write('x = %d'%idx_s)
                 else:
-                    prod_mdp_nm_file.write('| s = %d'%idx_s)
+                    prod_mdp_nm_file.write('| x = %d'%idx_s)
                 j_Ip += 1
             prod_mdp_nm_file.write(';\n')
         # Hp
@@ -87,9 +87,9 @@ def prod_mdp_module_nx2prism(nx_prod_mdp):
             for s in Hp:
                 idx_s = states_list.index(s)
                 if j_Hp == 0:
-                    prod_mdp_nm_file.write('s = %d'%idx_s)
+                    prod_mdp_nm_file.write('x = %d'%idx_s)
                 else:
-                    prod_mdp_nm_file.write('| s = %d'%idx_s)
+                    prod_mdp_nm_file.write('| x = %d'%idx_s)
                 j_Hp += 1
             prod_mdp_nm_file.write(';\n')
         k += 1

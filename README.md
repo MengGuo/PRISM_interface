@@ -20,7 +20,11 @@ Features
 
  Specifically, check the [P_MDP_TG package ](https://github.com/MengGuo/P_MDP_TG/blob/master/case_study_data_to_prism.py) to generate the product automaton from a (probabilistically-labeled) MDP and a LTL formula.
 
- Then this PRISM module (example [size5_all_base_nx2prism.nm](https://github.com/MengGuo/PRISM_interface/blob/master/data/size5_all_base_nx2prism.nm)) along with a trivia LTL formula (example [size5_all_base_nx2prism.nm.props](https://github.com/MengGuo/PRISM_interface/blob/master/data/size5_all_base_nx2prism.nm.props)) can be fed directly to PRISM. 
+ Then this PRISM module (example [size5_all_base_nx2prism.nm](https://github.com/MengGuo/PRISM_interface/blob/master/data/size5_all_base_nx2prism.nm)) along with a trivia LTL formula (example [size5_all_base_nx2prism.nm.props](https://github.com/MengGuo/PRISM_interface/blob/master/data/size5_all_base_nx2prism.nm.props)) can be fed directly to PRISM.
+
+<p align="center">  
+  <img src="https://github.com/MengGuo/PRISM_interface/blob/master/data/prism.png" width="600"/>
+</p>
 
 * Generate DRA model as MDP module in PRISM language.
 
