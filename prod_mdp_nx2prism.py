@@ -7,7 +7,7 @@ def prod_mdp_module_nx2prism(nx_prod_mdp):
     # product between mdp and dra
     # PRISM mdp module official example: http://www.prismmodelchecker.org/manual/ThePRISMLanguage/Example1
     name = nx_prod_mdp['name']
-    prod_mdp_nm_file = open("%s_nx2prism.nm" %name, "w")
+    prod_mdp_nm_file = open("data/%s_nx2prism.nm" %name, "w")
 
     prod_mdp_nm_file.write('//product mdp in PRISM language, generated from networkx digraph model \n')
     prod_mdp_nm_file.write('\n')
@@ -104,16 +104,18 @@ def prod_mdp_module_nx2prism(nx_prod_mdp):
     prod_mdp_nm_file.write('\n')
     for act,cost in act_cost.items():    
         prod_mdp_nm_file.write('[%s] true : %f;\n' %(''.join(act),cost))
+    prod_mdp_nm_file.write('\n')
+    prod_mdp_nm_file.write('\n')
     prod_mdp_nm_file.write('endrewards\n')
     prod_mdp_nm_file.write('\n')
 
     #----------------------------------------
     prod_mdp_nm_file.close()
-    print('PRISM mdp module saved at %s_nx2prism.nm' %name)
+    print('PRISM mdp module saved at data/%s_nx2prism.nm' %name)
 
 
 # networkx digraph object
-nx_prod_mdp = pickle.load(open('nx_prod_mdp_model.p','rb'))
+nx_prod_mdp = pickle.load(open('data/nx_prod_mdp_model.p','rb'))
 prod_mdp_module_nx2prism(nx_prod_mdp)
 
 
