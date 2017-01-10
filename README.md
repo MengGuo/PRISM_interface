@@ -23,7 +23,7 @@ Features
  Then this PRISM module (example [size5_all_base_nx2prism.nm](https://github.com/MengGuo/PRISM_interface/blob/master/data/size5_all_base_nx2prism.nm)) along with a trivia LTL formula (example [size5_all_base_nx2prism.nm.props](https://github.com/MengGuo/PRISM_interface/blob/master/data/size5_all_base_nx2prism.nm.props)) can be fed directly to PRISM.
 
 <p align="center">  
-  <img src="https://github.com/MengGuo/PRISM_interface/blob/master/data/prism.png" width="600"/>
+  <img src="https://github.com/MengGuo/PRISM_interface/blob/master/data/prism.png" width="700"/>
 </p>
 
 * Generate DRA model as MDP module in PRISM language.
