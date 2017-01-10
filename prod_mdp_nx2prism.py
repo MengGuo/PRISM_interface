@@ -6,14 +6,12 @@ def prod_mdp_module_nx2prism(nx_prod_mdp):
     # create product mdp module file
     # product between mdp and dra
     # PRISM mdp module official example: http://www.prismmodelchecker.org/manual/ThePRISMLanguage/Example1
-    if 'name' in nx_prod_mdp.graph:
-        name = nx_prod_mdp.graph['name']
-    else:
-        name = 'prod_mdp'
+    name = nx_prod_mdp['name']
     prod_mdp_nm_file = open("%s_nx2prism.nm" %name, "w")
 
     prod_mdp_nm_file.write('//product mdp in PRISM language, generated from networkx digraph model \n')
-
+    prod_mdp_nm_file.write('\n')
+    
     prod_mdp_nm_file.write('mdp \n')
     prod_mdp_nm_file.write('\n')
     prod_mdp_nm_file.write('\n')
@@ -21,25 +19,29 @@ def prod_mdp_module_nx2prism(nx_prod_mdp):
     #----------------------------------------
     # Module part
     prod_mdp_nm_file.write('module test_product_mdp \n')
+    prod_mdp_nm_file.write('\n')
 
     # converts state names to integers 
-    states_list = list(nx_prod_mdp.nodes())
+    states_list = list(nx_prod_mdp['states'])
     no_of_states = len(states_list)
-    init_state = list(nx_prod_mdp.graph['initial'])[0]
+    init_state = list(nx_prod_mdp['init'])[0]
     idx_init_state = states_list.index(init_state)
 
     prod_mdp_nm_file.write('x: [0..%d] init %d;\n' %(no_of_states, idx_init_state))
-
+    prod_mdp_nm_file.write('\n')
+    prod_mdp_nm_file.write('\n')
+    
     act_cost = dict()
     # example : [act] x=0 -> 0.8:(x'=0) + 0.2:(x'=1);
-    for f_s in nx_prod_mdp.nodes():
+    for f_s, acts in nx_prod_mdp['state_act'].iteritems():
         idx_f_s = states_list.index(f_s)
-        for act in nx_prod_mdp.node[f_s]['act']:
-            prod_mdp_nm_file.write('[%s] x=%d -> ' %(str(act), idx_f_s))
+        for act in acts:
+            prod_mdp_nm_file.write('[%s] x=%d -> ' %(str(''.join(act)), idx_f_s))
             k = 0
-            for t_s in nx_prod_mdp.successors_iter(f_s):
+            f_s_successors = [e[1] for e in nx_prod_mdp['edge_prop'].keys() if e[0] == f_s]
+            for t_s in f_s_successors:
                 idx_t_s = states_list.index(t_s)
-                prob_cost = nx_prod_mdp.edge[f_s][t_s]['prop']
+                prob_cost = nx_prod_mdp['edge_prop'][(f_s, t_s)]
                 # edge label ['prop'],
                 # dict of trans. prob and cost over different actions
                 # fixed
@@ -54,6 +56,8 @@ def prod_mdp_module_nx2prism(nx_prod_mdp):
                     k += 1
             prod_mdp_nm_file.write(';\n')
 
+    prod_mdp_nm_file.write('\n')
+    prod_mdp_nm_file.write('\n')
     prod_mdp_nm_file.write('endmodule\n')
     #----------------------------------------
 
@@ -61,32 +65,35 @@ def prod_mdp_module_nx2prism(nx_prod_mdp):
     # label part, for accepting pairs
     prod_mdp_nm_file.write('\n')
     prod_mdp_nm_file.write('\n')
-    for acc_pair in nx_prod_mdp.graph['accept']:
+    for acc_pair in nx_prod_mdp['accept']:
         k = 0
         Ip, Hp = acc_pair
         # Ip
-        prod_mdp_nm_file.write('label "K%d" = '%k)
-        j_Ip = 0
-        for s in Ip:
-            idx_s = states_list.index(s)
-            if j_Ip == 0:
-                prod_mdp_nm_file.write('s = %d'%idx_s)
-            else:
-                prod_mdp_nm_file.write('| s = %d'%idx_s)
+        if Ip:
+            prod_mdp_nm_file.write('label "K%d" = '%k)
+            j_Ip = 0
+            for s in Ip:
+                idx_s = states_list.index(s)
+                if j_Ip == 0:
+                    prod_mdp_nm_file.write('s = %d'%idx_s)
+                else:
+                    prod_mdp_nm_file.write('| s = %d'%idx_s)
                 j_Ip += 1
-        prod_mdp_nm_file.write(';\n')
+            prod_mdp_nm_file.write(';\n')
         # Hp
-        prod_mdp_nm_file.write('label "L%d" = '%k)
-        j_Hp = 0
-        for s in Hp:
-            idx_s = states_list.index(s)
-            if j_Hp == 0:
-                prod_mdp_nm_file.write('s = %d'%idx_s)
-            else:
-                prod_mdp_nm_file.write('| s = %d'%idx_s)
+        if Hp:
+            prod_mdp_nm_file.write('label "L%d" = '%k)
+            j_Hp = 0
+            for s in Hp:
+                idx_s = states_list.index(s)
+                if j_Hp == 0:
+                    prod_mdp_nm_file.write('s = %d'%idx_s)
+                else:
+                    prod_mdp_nm_file.write('| s = %d'%idx_s)
                 j_Hp += 1
-        prod_mdp_nm_file.write(';\n')
+            prod_mdp_nm_file.write(';\n')
         k += 1
+    print('--------------------')
     print('%d accepting pairs in the product automaton' %k)
     #----------------------------------------
     # cost part
@@ -94,9 +101,11 @@ def prod_mdp_module_nx2prism(nx_prod_mdp):
     prod_mdp_nm_file.write('\n')
 
     prod_mdp_nm_file.write('rewards\n')
+    prod_mdp_nm_file.write('\n')
     for act,cost in act_cost.items():    
-        prod_mdp_nm_file.write('[%s] true : %f;\n' %(act,cost))
+        prod_mdp_nm_file.write('[%s] true : %f;\n' %(''.join(act),cost))
     prod_mdp_nm_file.write('endrewards\n')
+    prod_mdp_nm_file.write('\n')
 
     #----------------------------------------
     prod_mdp_nm_file.close()
