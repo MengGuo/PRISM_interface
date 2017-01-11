@@ -30,7 +30,7 @@ Features
 
  Given a LTL formula, [P_MDP_TG package ](https://github.com/MengGuo/P_MDP_TG) provides automated translation to a NetworkX graph, via LTL2BA and LTL2DSTAR. Then the equivalent PRISM module as a MDP can be generated here.
 
- Note that the DRA (example [size5_all_base_nx2prism.nm](https://github.com/MengGuo/PRISM_interface/blob/master/data/dra_all_base_nx2prism.nm)) is encoded as a PRISM module to allow action-based LTL model checking (i.e., synchronized game between a MDP and a DRA), since PRISM only supports state-based LTL currently. 
+ Note that the DRA (example [dra_all_base_nx2prism.nm](https://github.com/MengGuo/PRISM_interface/blob/master/data/dra_all_base_nx2prism.nm)) is encoded as a PRISM module to allow action-based LTL model checking (i.e., synchronized game between a MDP and a DRA), since PRISM only supports state-based LTL currently. 
 
 
 <p align="center">  
