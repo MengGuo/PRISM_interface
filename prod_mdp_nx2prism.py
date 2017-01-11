@@ -38,7 +38,7 @@ def prod_mdp_module_nx2prism(nx_prod_mdp):
         for act in acts:
             prod_mdp_nm_file.write('[%s] x=%d -> ' %(str(''.join(act)), idx_f_s))
             k = 0
-            f_s_successors = [e[1] for e in nx_prod_mdp['edge_prop'].keys() if e[0] == f_s]
+            f_s_successors = [e[1] for e in nx_prod_mdp['edge_prop'].iterkeys() if e[0] == f_s]
             for t_s in f_s_successors:
                 idx_t_s = states_list.index(t_s)
                 prob_cost = nx_prod_mdp['edge_prop'][(f_s, t_s)]
@@ -65,8 +65,8 @@ def prod_mdp_module_nx2prism(nx_prod_mdp):
     # label part, for accepting pairs
     prod_mdp_nm_file.write('\n')
     prod_mdp_nm_file.write('\n')
+    k = 0
     for acc_pair in nx_prod_mdp['accept']:
-        k = 0
         Ip, Hp = acc_pair
         # Ip
         if Ip:
