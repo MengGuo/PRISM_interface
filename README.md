@@ -39,7 +39,7 @@ Features
 
 * Generate labeled MDP module in PRISM language, from NetworkX graph object.
 
- Given a labeled MDP digraph, [P_MDP_TG package ](https://github.com/MengGuo/P_MDP_TG/tree/master/pickle_for_prism) generates the corresponding mdp module in PRISM language, see example [size5_all_base_nx2prism.nm](https://github.com/MengGuo/PRISM_interface/blob/master/data/size5_motion_mdp_nx2prism.nm)
+ Given a labeled MDP digraph, [P_MDP_TG package ](https://github.com/MengGuo/P_MDP_TG/tree/master/pickle_for_prism) generates the corresponding mdp module in PRISM language, see example [size5_motion_mdp_nx2prism.nm](https://github.com/MengGuo/PRISM_interface/blob/master/data/size5_motion_mdp_nx2prism.nm)
 
 <p align="center">  
   <img src="https://github.com/MengGuo/PRISM_interface/blob/master/data/prism_mdp.png" width="700"/>
